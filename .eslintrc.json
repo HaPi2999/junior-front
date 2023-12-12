@@ -1,0 +1,40 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "license-header"
+    ],
+    "rules": {
+      "license-header/header": [ 
+        "error", "./license.js" 
+      ],
+      "semi": ["error", "never"],
+      "quotes": ["error", "single"],
+      "react/jsx-indent-props": [
+        "error",
+        4
+      ],
+      "no-control-regex": "off"
+    }
+}  
