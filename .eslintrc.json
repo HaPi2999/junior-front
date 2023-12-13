@@ -35,6 +35,7 @@
         "error",
         4
       ],
-      "no-control-regex": "off"
+      "no-control-regex": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     }
 }  

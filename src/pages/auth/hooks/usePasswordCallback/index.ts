@@ -1,13 +1,12 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
 import { ChangeEvent, Dispatch, SetStateAction, useCallback } from 'react'
-import { IErrors } from '~pages/auth/components/RegisterForm/types'
 
-const usePasswordCallback = (
+const usePasswordCallback = <T, >(
     setPassword: Dispatch<SetStateAction<string>>,
-    setErrors: Dispatch<SetStateAction<IErrors>>
+    setErrors: Dispatch<SetStateAction<T>>
 ) => useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
         setPassword(value)
@@ -23,6 +22,6 @@ const usePasswordCallback = (
                 password: ''
             }))
         }
-    }, [setPassword])
+    }, [setPassword, setErrors])
 
 export default usePasswordCallback

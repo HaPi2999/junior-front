@@ -1,5 +1,5 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
 export interface IButtonProps {

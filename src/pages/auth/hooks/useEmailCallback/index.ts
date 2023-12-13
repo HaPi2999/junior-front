@@ -1,13 +1,12 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
 import { ChangeEvent, Dispatch, SetStateAction, useCallback } from 'react'
-import { IErrors } from '../../types'
 
-const useEmailCallback = (
+const useEmailCallback = <T, >(
     setEmail: Dispatch<SetStateAction<string>>,
-    setErrors: Dispatch<SetStateAction<IErrors>>
+    setErrors: Dispatch<SetStateAction<T>>
 ) =>
     useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
@@ -25,6 +24,6 @@ const useEmailCallback = (
                 email: ''
             }))
         }
-    }, [setEmail])
+    }, [setEmail, setErrors])
 
 export default useEmailCallback

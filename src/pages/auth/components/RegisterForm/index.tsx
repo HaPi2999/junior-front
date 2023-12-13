@@ -1,22 +1,25 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useCallback, useState } from 'react'
 import Input from '../Input'
 import Button from '../Button'
-import useNameCallback from '~pages/auth/components/RegisterForm/hooks/useNameCallback'
-import useEmailCallback from '~pages/auth/components/RegisterForm/hooks/useEmailCallback'
-import usePasswordCallback from '~pages/auth/components/RegisterForm/hooks/usePasswordCallback'
-import useConfirmPasswordCallback from '~pages/auth/components/RegisterForm/hooks/useConfirmPasswordCallback'
-import { IErrors } from '~pages/auth/components/RegisterForm/types'
+import useNameCallback from '~pages/auth/hooks/useNameCallback'
+import useEmailCallback from '../../hooks/useEmailCallback'
+import usePasswordCallback from '~pages/auth/hooks/usePasswordCallback'
+import useConfirmPasswordCallback from '../../hooks/useConfirmPasswordCallback'
+import { IErrors } from './types'
+import { LOGIN } from '~pages/auth/constants'
+import { ILoginFormProps } from '../LoginForm/types'
+import useRegisterMutation from './hooks/useRegisterMutation'
 
-const RegisterForm: FC = () => {
+const RegisterForm: FC<ILoginFormProps> = ({ setHash }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-
+    
     const [errors, setErrors] = useState<IErrors>({
         name: '',
         email: '',
@@ -25,10 +28,26 @@ const RegisterForm: FC = () => {
     })
 
 
-    const handleNameChange = useNameCallback(setName, setErrors)
-    const handleEmailChange = useEmailCallback(setEmail, setErrors)
-    const handlePasswordChange = usePasswordCallback(setPassword, setErrors)
-    const handleConfirmPasswordChange = useConfirmPasswordCallback(password, setConfirmPassword, setErrors)
+    const { isLoading, data, error, mutate } = useRegisterMutation()
+
+    const handleNameChange = useNameCallback<IErrors>(setName, setErrors)
+    const handleEmailChange = useEmailCallback<IErrors>(setEmail, setErrors)
+    const handlePasswordChange = usePasswordCallback<IErrors>(setPassword, setErrors)
+    const handleConfirmPasswordChange = useConfirmPasswordCallback<IErrors>(password, setConfirmPassword, setErrors)
+    const handleLoginRedirect = useCallback(() => setHash(LOGIN), [setHash])
+
+    console.log(data)
+
+    const handleRegister = useCallback(() => {
+        mutate({
+            username: name,
+            email: email,
+            password: password
+        })
+
+        return 0
+    }, [name, email, password, mutate])
+
 
     return (
         <div className="form">
@@ -61,9 +80,9 @@ const RegisterForm: FC = () => {
             <div className="btn-container">
                 <Button
                     title="Регистрация"
-                    onClick={() => {}}
+                    onClick={handleRegister}
                 />
-                <div className="sign-in">
+                <div className="sign-in" onClick={handleLoginRedirect}>
                     Я уже зарегистрирован
                 </div>
             </div>

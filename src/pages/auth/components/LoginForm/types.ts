@@ -5,12 +5,11 @@
 import { Dispatch, SetStateAction } from 'react'
 
 export interface IErrors {
-    name: string
     email: string
     password: string
-    confirmPassword: string
 }
 
-export interface IRegisterFormProps {
+export interface ILoginFormProps {
     setHash: Dispatch<SetStateAction<string>>
 }
+

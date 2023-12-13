@@ -1,13 +1,12 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
 import { ChangeEvent, Dispatch, SetStateAction, useCallback } from 'react'
-import { IErrors } from '../../types'
 
-const useNameCallback = (
+const useNameCallback = <T, >(
     setName: Dispatch<SetStateAction<string>>,
-    setErrors: Dispatch<SetStateAction<IErrors>>
+    setErrors: Dispatch<SetStateAction<T>>
 ) =>
     useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
@@ -24,6 +23,6 @@ const useNameCallback = (
                 name: ''
             }))
         }
-    }, [setName])
+    }, [setName, setErrors])
 
 export default useNameCallback

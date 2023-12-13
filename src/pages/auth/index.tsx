@@ -1,11 +1,15 @@
 /**
- * @Copyright hapi-learn.com 2023
+ * @Copyright junior-team 2023
  */
 
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState } from 'react'
 import RegisterForm from './components/RegisterForm'
+import { LOGIN, REGISTER } from './constants'
+import LoginForm from './components/LoginForm'
 
 const Auth: FC = () => {
+    const [hash, setHash] = useState(LOGIN)
+
     return (
         <div id="auth">
             <div className="container">
@@ -17,7 +21,8 @@ const Auth: FC = () => {
                     </div>
                 </div>
                 <div className="part">
-                    <RegisterForm />
+                    { hash === LOGIN && <LoginForm setHash={setHash} /> }
+                    { hash === REGISTER && <RegisterForm setHash={setHash} /> }
                 </div>
             </div>
         </div>
